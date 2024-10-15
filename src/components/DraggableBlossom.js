@@ -42,7 +42,7 @@ function DraggableBlossom({ blossom, onBlossomAdd }) {
   return (
     <BlossomItem ref={drag} style={springProps}>
       <BlossomImage
-        src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "-")}.jpg`}
+        src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
         alt={blossom}
       />
       <p>{blossom}</p>

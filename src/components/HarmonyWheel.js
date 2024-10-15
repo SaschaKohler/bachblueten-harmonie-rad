@@ -52,6 +52,60 @@ const Center = styled.div`
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
+const WheelAndInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+`;
+
+const AnimatedInfoPanel = styled(animated.div)`
+  width: 300px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+`;
+const InfoTitle = styled.h3`
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2em;
+`;
+
+const InfoDescription = styled.p`
+  color: #666;
+  font-size: 0.9em;
+  line-height: 1.5;
+`;
+
+const BlossomList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+`;
+
+const BlossomItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
+const BlossomImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+`;
+
+const BlossomName = styled.span`
+  font-size: 0.8em;
+  color: #444;
+`;
 
 const AnimatedSector = ({
   sector,
@@ -95,22 +149,53 @@ const AnimatedSector = ({
 };
 
 const HarmonyWheel = ({ sectors, onSectorClick, activeSector }) => {
+  const infoPanelAnimation = useSpring({
+    opacity: activeSector ? 1 : 0,
+    transform: activeSector ? "translateY(0)" : "translateY(20px)",
+    config: config.gentle,
+  });
   return (
-    <WheelContainer>
-      <Wheel>
-        {sectors.map((sector, index) => (
-          <AnimatedSector
-            key={sector.group}
-            sector={sector}
-            index={index}
-            totalSectors={sectors.length}
-            onSectorClick={onSectorClick}
-            isActive={activeSector === sector}
-          />
-        ))}
-      </Wheel>
-      <Center>Harmonie</Center>
-    </WheelContainer>
+    <WheelAndInfoContainer>
+      <WheelContainer>
+        <Wheel>
+          {sectors.map((sector, index) => (
+            <AnimatedSector
+              key={sector.group}
+              sector={sector}
+              index={index}
+              totalSectors={sectors.length}
+              onSectorClick={onSectorClick}
+              isActive={activeSector === sector}
+            />
+          ))}
+        </Wheel>
+        <Center>Harmonie</Center>
+      </WheelContainer>
+
+      <AnimatedInfoPanel style={infoPanelAnimation}>
+        {activeSector ? (
+          <>
+            <InfoTitle>{activeSector.group}</InfoTitle>
+            <InfoDescription>{activeSector.description}</InfoDescription>
+            <BlossomList>
+              {activeSector.blossoms.map((blossom) => (
+                <BlossomItem key={blossom}>
+                  <BlossomImage
+                    src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
+                    alt={blossom}
+                  />
+                  <BlossomName>{blossom}</BlossomName>
+                </BlossomItem>
+              ))}
+            </BlossomList>
+          </>
+        ) : (
+          <InfoDescription>
+            Wählen Sie eine Gefühlsgruppe aus, um mehr Informationen zu sehen.
+          </InfoDescription>
+        )}
+      </AnimatedInfoPanel>
+    </WheelAndInfoContainer>
   );
 };
 

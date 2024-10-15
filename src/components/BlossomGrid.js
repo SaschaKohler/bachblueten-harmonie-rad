@@ -1,34 +1,28 @@
 import React from "react";
-import { useTrail, animated } from "react-spring";
-import styled from "styled-components";
-import Blossom from "./Blossom";
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 15px;
-  padding: 20px;
-`;
-
-function BlossomGrid({ blossoms, selectedBlossoms, onBlossomSelect }) {
-  const trail = useTrail(blossoms.length, {
-    from: { opacity: 0, transform: "scale(0.8)" },
-    to: { opacity: 1, transform: "scale(1)" },
-  });
-
+const BlossomGrid = ({ blossoms, selectedBlossoms, onBlossomSelect }) => {
   return (
-    <Grid>
-      {trail.map((style, index) => (
-        <animated.div key={blossoms[index]} style={style}>
-          <Blossom
-            blossom={blossoms[index]}
-            isSelected={selectedBlossoms.includes(blossoms[index])}
-            onSelect={() => onBlossomSelect(blossoms[index])}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      {blossoms.map((blossom) => (
+        <div
+          key={blossom}
+          className={`p-4 rounded-lg cursor-pointer transition-all ${
+            selectedBlossoms.includes(blossom)
+              ? "bg-blue-100 shadow-md"
+              : "bg-gray-100 hover:bg-gray-200"
+          }`}
+          onClick={() => onBlossomSelect(blossom)}
+        >
+          <img
+            src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
+            alt={blossom}
+            className="w-full h-24 object-cover rounded-md mb-2"
           />
-        </animated.div>
+          <p className="text-center font-medium">{blossom}</p>
+        </div>
       ))}
-    </Grid>
+    </div>
   );
-}
+};
 
 export default BlossomGrid;

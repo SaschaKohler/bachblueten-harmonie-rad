@@ -8,10 +8,10 @@ const Card = styled(animated.div)`
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 300px;
-  margin-left: 20px;
+  margin-left: 19px;
 `;
 
-const Title = styled.h3`
+const Title = styled.h1`
   color: #4682b4;
   margin-bottom: 10px;
 `;

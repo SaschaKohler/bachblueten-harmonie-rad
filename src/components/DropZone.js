@@ -1,46 +1,7 @@
-import React, { useCallback } from "react";
-import { useDrop } from "react-dnd";
-import { useTransition, animated, useSpring } from "react-spring";
-import styled from "styled-components";
+import React from "react";
+import { useTransition, animated } from "@react-spring/web";
 
-const DropArea = styled.div`
-  min-height: 100px;
-  border: 2px dashed #4682b4;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const SelectedBlossom = styled(animated.div)`
-  display: flex;
-  align-items: center;
-  background-color: #fffaf0;
-  padding: 5px 10px;
-  border-radius: 20px;
-  margin: 5px;
-`;
-
-function DropZone({ selectedBlossoms, onBlossomRemove, onBlossomAdd }) {
-  const handleDrop = useCallback(
-    (item) => {
-      onBlossomAdd(item.name);
-    },
-    [onBlossomAdd],
-  );
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: "blossom",
-    drop: handleDrop,
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  }));
-
-  const springProps = useSpring({
-    backgroundColor: isOver ? "#e6f2ff" : "transparent",
-    borderColor: isOver ? "#4682B4" : "#c0c0c0",
-  });
+const DropZone = ({ selectedBlossoms, onBlossomRemove }) => {
   const transitions = useTransition(selectedBlossoms, {
     from: { opacity: 0, transform: "scale(0.8)" },
     enter: { opacity: 1, transform: "scale(1)" },
@@ -49,32 +10,29 @@ function DropZone({ selectedBlossoms, onBlossomRemove, onBlossomAdd }) {
   });
 
   return (
-    <DropArea ref={drop} style={springProps}>
+    <div className="min-h-24 border-2 border-dashed border-blue-300 rounded-lg p-4 flex flex-wrap gap-2">
       {transitions((style, blossom) => (
-        <SelectedBlossom key={blossom} style={style}>
+        <animated.div
+          style={style}
+          className="bg-blue-50 rounded-full px-3 py-1 flex items-center"
+          key={blossom}
+        >
           <img
             src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
             alt={blossom}
-            width="30"
-            height="30"
-            style={{ borderRadius: "50%", marginRight: "10px" }}
+            className="w-6 h-6 rounded-full mr-2"
           />
-          <span>{blossom}</span>
+          <span className="mr-2">{blossom}</span>
           <button
             onClick={() => onBlossomRemove(blossom)}
-            style={{
-              marginLeft: "10px",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
+            className="text-red-500 font-bold"
           >
             ×
           </button>
-        </SelectedBlossom>
+        </animated.div>
       ))}
-    </DropArea>
+    </div>
   );
-}
+};
 
 export default DropZone;

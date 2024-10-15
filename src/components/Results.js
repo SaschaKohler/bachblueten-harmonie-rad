@@ -1,53 +1,26 @@
 import React from "react";
-import styled from "styled-components";
-import { useTrail, animated } from "react-spring";
-
-const ResultContainer = styled.div`
-  margin-top: 20px;
-`;
-
-const BlossomResult = styled(animated.div)`
-  display: flex;
-  align-items: start;
-  background-color: #f0f0f0;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-`;
-
-const BlossomImage = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
-`;
-
-const BlossomInfo = styled.div`
-  flex: 1;
-`;
 
 const Results = ({ selectedBlossoms, blossomData, onReset }) => {
-  const trail = useTrail(selectedBlossoms.length, {
-    from: { opacity: 0, transform: "translateY(20px)" },
-    to: { opacity: 1, transform: "translateY(0)" },
-  });
-
   return (
-    <ResultContainer>
-      <h2>Ihre Bachblüten Auswahl</h2>
-      {trail.map((props, index) => {
-        const blossom = selectedBlossoms[index];
-        const data = blossomData[blossom];
-        return (
-          <BlossomResult key={blossom} style={props}>
-            <BlossomImage
-              src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
-              alt={blossom}
-            />
-            <BlossomInfo>
-              <h3>
-                {data.nummer}. {blossom}
-              </h3>
+    <div className="mt-8">
+      <h2 className="text-2xl font-semibold text-blue-800 mb-4">
+        Ihre Bachblüten Auswahl
+      </h2>
+      <div className="space-y-4">
+        {selectedBlossoms.map((blossom) => {
+          const data = blossomData[blossom];
+          return (
+            <div key={blossom} className="bg-white rounded-lg shadow-md p-4">
+              <div className="flex items-center mb-2">
+                <img
+                  src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
+                  alt={blossom}
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <h3 className="text-xl font-semibold">
+                  {data.nummer}. {blossom}
+                </h3>
+              </div>
               <p>
                 <strong>Deutsch:</strong> {data.deutsch}
               </p>
@@ -57,12 +30,17 @@ const Results = ({ selectedBlossoms, blossomData, onReset }) => {
               <p>
                 <strong>Affirmation:</strong> {data.affirmation}
               </p>
-            </BlossomInfo>
-          </BlossomResult>
-        );
-      })}
-      <button onClick={onReset}>Neue Auswahl</button>
-    </ResultContainer>
+            </div>
+          );
+        })}
+      </div>
+      <button
+        onClick={onReset}
+        className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+      >
+        Neue Auswahl
+      </button>
+    </div>
   );
 };
 

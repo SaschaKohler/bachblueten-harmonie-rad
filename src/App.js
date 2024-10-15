@@ -1,37 +1,16 @@
 import React, { useState, useCallback } from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import styled from "styled-components";
 import HarmonyWheel from "./components/HarmonyWheel";
 import BlossomGrid from "./components/BlossomGrid";
+import ColorSelector from "./components/ColorSelector";
 import DropZone from "./components/DropZone";
 import Results from "./components/Results";
-import InfoCard from "./components/InfoCard";
 import { sectors, blossomData } from "./data/blossomData";
-
-const AppContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-`;
-
-const Title = styled.h1`
-  color: #4682b4;
-  text-align: center;
-`;
-
-const WheelAndInfoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 20px;
-`;
 
 function App() {
   const [selectedSector, setSelectedSector] = useState(null);
   const [selectedBlossoms, setSelectedBlossoms] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [useColorSelection, setUseColorSelection] = useState(false);
 
   const handleSectorClick = (sector) => {
     setSelectedSector(sector);
@@ -64,51 +43,76 @@ function App() {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <AppContainer>
-        <Title>Bachblüten Harmonie-Rad</Title>
-        <WheelAndInfoContainer>
-          <HarmonyWheel
-            sectors={sectors}
-            onSectorClick={handleSectorClick}
-            activeSector={selectedSector}
-          />
-          <InfoCard sector={selectedSector} />
-        </WheelAndInfoContainer>
-        {selectedSector && !showResults && (
-          <>
-            <h2>{selectedSector.group}</h2>
-            <BlossomGrid
-              blossoms={selectedSector.blossoms}
-              selectedBlossoms={selectedBlossoms}
-              onBlossomSelect={handleBlossomSelect}
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-blue-800 mb-8">
+          Bachblüten Harmonie-Rad
+        </h1>
+        <div className="flex justify-center mb-8">
+          <button
+            className={`px-6 py-2 rounded-l-full ${!useColorSelection ? "bg-blue-600 text-white" : "bg-white text-blue-600"}`}
+            onClick={() => setUseColorSelection(false)}
+          >
+            Gefühlsgruppen
+          </button>
+          <button
+            className={`px-6 py-2 rounded-r-full ${useColorSelection ? "bg-blue-600 text-white" : "bg-white text-blue-600"}`}
+            onClick={() => setUseColorSelection(true)}
+          >
+            Farbauswahl
+          </button>
+        </div>
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          {useColorSelection ? (
+            <ColorSelector
+              sectors={sectors}
+              onSectorClick={handleSectorClick}
+              activeSector={selectedSector}
             />
-          </>
-        )}
-        {!showResults && (
-          <>
-            <DropZone
-              selectedBlossoms={selectedBlossoms}
-              onBlossomRemove={handleBlossomRemove}
-              onBlossomAdd={handleBlossomSelect}
+          ) : (
+            <HarmonyWheel
+              sectors={sectors}
+              onSectorClick={handleSectorClick}
+              activeSector={selectedSector}
             />
-            <button
-              onClick={handleConfirm}
-              disabled={selectedBlossoms.length === 0}
-            >
-              Auswahl bestätigen
-            </button>
-          </>
-        )}
-        {showResults && (
-          <Results
-            selectedBlossoms={selectedBlossoms}
-            blossomData={blossomData}
-            onReset={handleReset}
-          />
-        )}
-      </AppContainer>
-    </DndProvider>
+          )}
+          {selectedSector && !showResults && (
+            <div className="mt-8">
+              <h2 className="text-2xl font-semibold text-blue-800 mb-4">
+                {selectedSector.group}
+              </h2>
+              <BlossomGrid
+                blossoms={selectedSector.blossoms}
+                selectedBlossoms={selectedBlossoms}
+                onBlossomSelect={handleBlossomSelect}
+              />
+            </div>
+          )}
+          {!showResults && (
+            <div className="mt-8">
+              <DropZone
+                selectedBlossoms={selectedBlossoms}
+                onBlossomRemove={handleBlossomRemove}
+              />
+              <button
+                onClick={handleConfirm}
+                disabled={selectedBlossoms.length === 0}
+                className="mt-4 px-6 py-2 bg-green-500 text-white rounded-full disabled:opacity-50"
+              >
+                Auswahl bestätigen
+              </button>
+            </div>
+          )}
+          {showResults && (
+            <Results
+              selectedBlossoms={selectedBlossoms}
+              blossomData={blossomData}
+              onReset={handleReset}
+            />
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

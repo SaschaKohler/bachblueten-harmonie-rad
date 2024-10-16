@@ -1,7 +1,10 @@
 import React from "react";
 import { useTransition, animated } from "@react-spring/web";
+import BlossomItem from "./blossom/BlossomItem";
+import { blossomData } from "../data/blossomData";
 
 const DropZone = ({ selectedBlossoms, onBlossomRemove }) => {
+  console.log(selectedBlossoms);
   const transitions = useTransition(selectedBlossoms, {
     from: { opacity: 0, transform: "scale(0.8)" },
     enter: { opacity: 1, transform: "scale(1)" },
@@ -17,11 +20,13 @@ const DropZone = ({ selectedBlossoms, onBlossomRemove }) => {
           className="bg-blue-50 rounded-full px-3 py-1 flex items-center"
           key={blossom}
         >
-          <img
-            src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
-            alt={blossom}
-            className="w-6 h-6 rounded-full mr-2"
-          />
+          <div className="w-20 h-20 mr-2">
+            <BlossomItem
+              blossom={blossom}
+              showName={false}
+              blossomData={blossomData}
+            />
+          </div>
           <span className="mr-2">{blossom}</span>
           <button
             onClick={() => onBlossomRemove(blossom)}

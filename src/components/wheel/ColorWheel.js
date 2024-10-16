@@ -1,36 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-import { useSpring, animated, config } from "@react-spring/web";
-
-const WheelContainer = styled.div`
-  width: 300px;
-  height: 300px;
-  position: relative;
-  margin: 0 auto;
-`;
-
-const Wheel = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-`;
-
-const SectorBase = styled.div`
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  left: 50%;
-  top: 50%;
-  transform-origin: 0% 0%;
-`;
-
-const AnimatedSectorContent = styled(animated.div)`
-  width: 100%;
-  height: 100%;
-  transform-origin: 0% 0%;
-`;
+import { useSpring, config } from "@react-spring/web";
+import {
+  SectorBase,
+  AnimatedSectorContent,
+  WheelContainer,
+  Wheel,
+} from "../../styles/HarmonyWheelStyles";
 
 const AnimatedSector = ({
   color,

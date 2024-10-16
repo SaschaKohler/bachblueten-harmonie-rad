@@ -1,4 +1,5 @@
 import React from "react";
+import BlossomItem from "./blossom/BlossomItem";
 
 const Results = ({ selectedBlossoms, blossomData, onReset }) => {
   return (
@@ -12,12 +13,12 @@ const Results = ({ selectedBlossoms, blossomData, onReset }) => {
           return (
             <div key={blossom} className="bg-white rounded-lg shadow-md p-4">
               <div className="flex items-center mb-2">
-                <img
-                  src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
-                  alt={blossom}
-                  className="w-12 h-12 rounded-full mr-4"
+                <BlossomItem
+                  blossom={blossom}
+                  showName={false}
+                  blossomData={blossomData}
                 />
-                <h3 className="text-xl font-semibold">
+                <h3 className="text-xl font-semibold ml-4">
                   {data.nummer}. {blossom}
                 </h3>
               </div>

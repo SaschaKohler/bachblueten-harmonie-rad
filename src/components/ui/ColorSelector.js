@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ColorWheel from "./ColorWheel";
-import { blossomData } from "../data/blossomData";
+import ColorWheel from "../wheel/ColorWheel";
+import { blossomData } from "../../data/blossomData";
 
 const ColorSelector = ({ sectors, onSectorClick, activeSector }) => {
   const [selectedGroup, setSelectedGroup] = useState(null);

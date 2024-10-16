@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import HarmonyWheel from "./components/HarmonyWheel";
-import BlossomGrid from "./components/BlossomGrid";
-import ColorSelector from "./components/ColorSelector";
+import HarmonyWheel from "./components/wheel/HarmonyWheel";
+import BlossomGrid from "./components/blossom/BlossomGrid";
+import ColorSelector from "./components/ui/ColorSelector";
 import DropZone from "./components/DropZone";
 import Results from "./components/Results";
 import { sectors, blossomData } from "./data/blossomData";
@@ -22,6 +22,7 @@ function App() {
       if (!prev.includes(blossom)) {
         return [...prev, blossom];
       }
+
       return prev;
     });
   }, []);
@@ -85,6 +86,7 @@ function App() {
                 blossoms={selectedSector.blossoms}
                 selectedBlossoms={selectedBlossoms}
                 onBlossomSelect={handleBlossomSelect}
+                blossomData={blossomData}
               />
             </div>
           )}

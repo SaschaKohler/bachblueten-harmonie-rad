@@ -1,4 +1,6 @@
 import React from "react";
+import { blossomData } from "../../data/blossomData";
+import BlossomItem from "./BlossomItem";
 
 const BlossomGrid = ({ blossoms, selectedBlossoms, onBlossomSelect }) => {
   return (
@@ -13,12 +15,14 @@ const BlossomGrid = ({ blossoms, selectedBlossoms, onBlossomSelect }) => {
           }`}
           onClick={() => onBlossomSelect(blossom)}
         >
-          <img
-            src={`/images/blossoms/${blossom.toLowerCase().replace(/\s+/g, "_")}.png`}
-            alt={blossom}
-            className="w-full h-24 object-cover rounded-md mb-2"
-          />
-          <p className="text-center font-medium">{blossom}</p>
+          <div className="w-full h-24 mb-2">
+            <BlossomItem
+              blossom={blossom}
+              showNumber={true}
+              blossomData={blossomData}
+            />
+          </div>
+          {/* <p className="text-center font-medium">{blossom}</p> */}
         </div>
       ))}
     </div>

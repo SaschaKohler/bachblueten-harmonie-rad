@@ -1,21 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import Layout from "./components/layout/Layout";
 import Dashboard from "./components/pages/Dashboard";
 import BachblutenRad from "./components/pages/BachblutenRad";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import "./styles/tailwind.css";
 
 function App() {
   return (
-    <Router>
-      <Layout>
+    <AuthProvider>
+      <Router>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/bachbluten-rad" element={<BachblutenRad />} />
-          {/* Füge hier weitere Routen hinzu */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/bachbluten-rad" element={<BachblutenRad />} />
+            </Route>
+          </Route>
         </Routes>
-      </Layout>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

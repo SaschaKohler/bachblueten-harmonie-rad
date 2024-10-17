@@ -101,8 +101,8 @@ export const BlossomContainer = styled.div`
 `;
 
 export const BlossomImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 50%;
 `;
@@ -113,6 +113,6 @@ export const BlossomNumber = styled.span`
 `;
 
 export const BlossomName = styled.span`
-  font-size: 0.8em;
-  color: #444;
+  margin-top: 5px;
+  font-weight: medium;
 `;

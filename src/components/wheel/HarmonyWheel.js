@@ -55,14 +55,15 @@ const AnimatedSector = ({
 };
 
 const HarmonyWheel = ({ sectors, onSectorClick, activeSector }) => {
+  console.log(sectors);
   const infoPanelAnimation = useSpring({
     opacity: activeSector ? 1 : 0,
     transform: activeSector ? "translateY(0)" : "translateY(20px)",
     config: config.gentle,
   });
   return (
-    <WheelAndInfoContainer>
-      <WheelContainer>
+    <WheelAndInfoContainer className="flex flex-col sm:flex-row items-center sm:items-start justify-center">
+      <WheelContainer className="mb-4 sm:mb-0 sm:mr-4">
         <Wheel>
           {sectors.map((sector, index) => (
             <AnimatedSector

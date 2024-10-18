@@ -55,7 +55,7 @@ const AnimatedSector = ({
 };
 
 const HarmonyWheel = ({ sectors, onSectorClick, activeSector }) => {
-  console.log(sectors);
+  console.log("Rendering HarmonyWheel", { sectors, activeSector });
   const infoPanelAnimation = useSpring({
     opacity: activeSector ? 1 : 0,
     transform: activeSector ? "translateY(0)" : "translateY(20px)",

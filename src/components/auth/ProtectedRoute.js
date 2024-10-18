@@ -4,11 +4,14 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const ProtectedRoute = () => {
   const { user } = useAuth();
+  console.log("Protected Route", user);
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    console.log("Protected Route - Redirecting to auth");
+    return <Navigate to="/auth" replace />;
   }
 
+  console.log("Protected Route - Rendering Outlet");
   return <Outlet />;
 };
 

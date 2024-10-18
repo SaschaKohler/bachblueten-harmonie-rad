@@ -2,19 +2,19 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
-
-const BlossomItem = styled(animated.div)`
-  cursor: pointer;
-  margin: 5px;
-  text-align: center;
-  opacity: ${(props) => (props.isSelected ? 0.5 : 1)};
-`;
-
-const BlossomImage = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-`;
+import { BlossomItem, BlossomImage } from "../../styles/HarmonyWheelStyles";
+// const BlossomItem = styled(animated.div)`
+//   cursor: pointer;
+//   margin: 5px;
+//   text-align: center;
+//   opacity: ${(props) => (props.isSelected ? 0.5 : 1)};
+// `;
+//
+// const BlossomImage = styled.img`
+//   width: 80px;
+//   height: 80px;
+//   border-radius: 50%;
+// `;
 
 function Blossom({ blossom, isSelected, onSelect }) {
   const [{ isDragging }, drag] = useDrag(() => ({

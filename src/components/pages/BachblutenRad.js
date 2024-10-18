@@ -1,12 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import HarmonyWheel from "../wheel/HarmonyWheel";
 import BlossomGrid from "../blossom/BlossomGrid";
 import ColorSelector from "../ui/ColorSelector";
 import DropZone from "../DropZone";
 import Results from "../Results";
+import { useAuth } from "../../contexts/AuthContext";
+import { supabase } from "../../config/supabaseClient";
 import { sectors, blossomData } from "../../data/blossomData";
 
 const BachblutenRad = () => {
+  const { user } = useAuth();
   const [selectedSector, setSelectedSector] = useState(null);
   const [selectedBlossoms, setSelectedBlossoms] = useState([]);
   const [showResults, setShowResults] = useState(false);
@@ -43,6 +46,21 @@ const BachblutenRad = () => {
     setShowResults(false);
   };
 
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     const {
+  //       data: { user },
+  //     } = await supabase.auth.getUser();
+  //     setUser(user);
+  //   };
+  //   checkUser();
+  // }, []);
+  //
+  // if (!user) {
+  //   return <div>Bitte melden Sie sich an, um das Bachblüten-Rad zu sehen.</div>;
+  // }
+
+  console.log("Rendering BachblutenRad", user);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4 sm:p-6 md:p-8">
       <div className="max-w-xl mx-auto sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">

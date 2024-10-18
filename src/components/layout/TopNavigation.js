@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext"; // Stellen Sie sicher, dass der Pfad korrekt ist
+import { useNavigate } from "react-router-dom";
 
 const TopNavigation = () => {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/auth");
+    } catch (error) {
+      console.error("Fehler beim Ausloggen:", error);
+    }
+  };
+
   return (
     <header className="bg-white shadow-md p-4">
       <div className="flex justify-between items-center">
@@ -23,11 +38,38 @@ const TopNavigation = () => {
             </svg>
           </button>
           <div className="relative">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="https://via.placeholder.com/150"
-              alt="User avatar"
-            />
+            <button
+              onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+              className="focus:outline-none"
+            >
+              <img
+                className="w-8 h-8 rounded-full"
+                src={user?.avatar_url || "https://via.placeholder.com/150"}
+                alt="User avatar"
+              />
+            </button>
+            {isUserMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Profil
+                </a>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Einstellungen
+                </a>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Ausloggen
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

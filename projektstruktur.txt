@@ -1,0 +1,113 @@
+.
+├── README.md
+├── components.json
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── projektstruktur.txt
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── App.css
+│   ├── App.js
+│   ├── App.js_old
+│   ├── App.test.js
+│   ├── components
+│   │   ├── DropZone.js
+│   │   ├── Results.js
+│   │   ├── auth
+│   │   │   ├── Login.js
+│   │   │   ├── ProtectedRoute.js
+│   │   │   ├── Register.js
+│   │   │   └── unifiedAuthPage.js
+│   │   ├── blossom
+│   │   │   ├── Blossom.js
+│   │   │   ├── BlossomGrid.js
+│   │   │   ├── BlossomItem.js
+│   │   │   └── DraggableBlossom.js
+│   │   ├── layout
+│   │   │   ├── Layout.js
+│   │   │   ├── SideNavigation.js
+│   │   │   └── TopNavigation.js
+│   │   ├── pages
+│   │   │   ├── BachblutenRad.js
+│   │   │   └── Dashboard.js
+│   │   ├── ui
+│   │   │   ├── ColorSelector.js
+│   │   │   ├── InfoCard.js
+│   │   │   └── alert.jsx
+│   │   └── wheel
+│   │       ├── ColorWheel.js
+│   │       └── HarmonyWheel.js
+│   ├── config
+│   │   └── supabaseClient.js
+│   ├── constants
+│   ├── contexts
+│   │   └── AuthContext.js
+│   ├── data
+│   │   └── blossomData.js
+│   ├── hooks
+│   │   └── useSupabase.js
+│   ├── images
+│   │   └── blossoms
+│   │       ├── agrimony.png
+│   │       ├── aspen.png
+│   │       ├── beech.png
+│   │       ├── centaury.png
+│   │       ├── cerato.png
+│   │       ├── cherry_plum.png
+│   │       ├── chestnut_bud.png
+│   │       ├── chicory.png
+│   │       ├── clematis.png
+│   │       ├── crab_apple.png
+│   │       ├── elm.png
+│   │       ├── gentian.png
+│   │       ├── gorse.png
+│   │       ├── heather.png
+│   │       ├── holly.png
+│   │       ├── honeysuckle.png
+│   │       ├── hornbeam.png
+│   │       ├── impatiens.png
+│   │       ├── larch.png
+│   │       ├── mimulus.png
+│   │       ├── mustard.png
+│   │       ├── oak.png
+│   │       ├── olive.png
+│   │       ├── pine.png
+│   │       ├── red_chestnut.png
+│   │       ├── rename_png.py
+│   │       ├── rock_rose.png
+│   │       ├── rock_water.png
+│   │       ├── scleranthus.png
+│   │       ├── star_of_bethlehem.png
+│   │       ├── sweet_chestnut.png
+│   │       ├── vervain.png
+│   │       ├── vine.png
+│   │       ├── walnut.png
+│   │       ├── water_violet.png
+│   │       ├── white_chestnut.png
+│   │       ├── wild_oat.png
+│   │       ├── wild_rose.png
+│   │       └── willow.png
+│   ├── index.css
+│   ├── index.js
+│   ├── lib
+│   │   └── utils.ts
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   ├── services
+│   │   └── supabaseService.js
+│   ├── setupTests.js
+│   └── styles
+│       ├── HarmonyWheelStyles.js
+│       ├── globals.css
+│       └── tailwind.css
+├── tailwind.config.js
+└── tsconfig.json
+
+19 directories, 91 files
